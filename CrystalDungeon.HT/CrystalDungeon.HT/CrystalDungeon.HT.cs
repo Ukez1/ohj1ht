@@ -1,8 +1,6 @@
 using System;
-using System.Collections.Generic;
 using Jypeli;
 using Jypeli.Assets;
-using Jypeli.Controls;
 using Jypeli.Widgets;
 
 /// @author gr313135
@@ -104,6 +102,7 @@ public class CrystalDungeon : PhysicsGame
     {
         TileMap kentta = TileMap.FromLevelAsset("kentta1.txt");
         kentta.SetTileMethod('#', LisaaTaso);
+        kentta.SetTileMethod('¤', LisaaTaso2);
         kentta.SetTileMethod('*', LisaaKristalli);
         kentta.SetTileMethod('S', LisaaSydan);
         kentta.SetTileMethod('N', LisaaPelaaja);
@@ -165,10 +164,19 @@ public class CrystalDungeon : PhysicsGame
     
     private void LisaaTaso(Vector paikka, double leveys, double korkeus)
     {
-        PhysicsObject taso = PhysicsObject.CreateStaticObject(leveys, korkeus);
+        GameObject taso = new GameObject(leveys, korkeus);
         taso.Position = paikka;
         taso.Color = Color.DarkGray;
         Add(taso);
+    }
+    
+    
+    private void LisaaTaso2(Vector paikka, double leveys, double korkeus)
+    {
+        PhysicsObject taso2 = PhysicsObject.CreateStaticObject(leveys, korkeus);
+        taso2.Position = paikka;
+        taso2.Color = Color.DarkGray;
+        Add(taso2);
     }
     
     
@@ -394,7 +402,7 @@ public class CrystalDungeon : PhysicsGame
         pomoLaskuri.LowerLimit += PomoKuoli; //Kun laskuri saa pienimmän arvon eli 0, pomo kuolee.
         
         ProgressBar pomopalkki = new ProgressBar(500, 60);
-        pomopalkki.X = Screen.Right - 1000;
+        pomopalkki.X = 0;
         pomopalkki.Y = Screen.Top - 25;
         pomopalkki.BarImage = tyhjaPomopalkki;
         pomopalkki.Image = taysiPomopalkki;
@@ -414,7 +422,9 @@ public class CrystalDungeon : PhysicsGame
         Keyboard.Listen(Key.D, ButtonState.Down, Liikuta, "Liikkuu vasemmalle", pelaaja1, NOPEUS);
         Keyboard.Listen(Key.W, ButtonState.Pressed, Hyppaa, "Pelaaja hyppää", pelaaja1, HYPPYNOPEUS);
         Keyboard.Listen(Key.S, ButtonState.Pressed, Hyppaa, "", pelaaja1, -HYPPYNOPEUS);
+        Keyboard.Listen(Key.Space, ButtonState.Down, Hyppaa, "", pelaaja1, HYPPYNOPEUS);
         
+        //Muut näppäimet:
         Keyboard.Listen(Key.R, ButtonState.Down, AloitaAlusta, "Aloittaa pelin alusta");
         Keyboard.Listen(Key.LeftShift, ButtonState.Pressed, AktivoiHuijaukset, "");
         Mouse.Listen(MouseButton.Left, ButtonState.Down, Ammu, "Kutsuu loitsun");
@@ -440,10 +450,8 @@ public class CrystalDungeon : PhysicsGame
         if (ammus != null) //Peli saattoi kaatua, jos ei tehnyt tarkistusta ja collisionhandler aktivoitui.
         {
             ammus.Tag = "Luoti";
-            // Työn alla:
-            //AddCollisionHandler<PhysicsObject, Pomo>(ammus, "pomo", Ammusosuipomoon);
             AddCollisionHandler<PhysicsObject, PlatformCharacter>(ammus, "vihollinen", AmmusOsui);
-
+            AddCollisionHandler<PhysicsObject, PlatformCharacter>(ammus, "pomo", AmmusOsui);
         }
     }
     
@@ -529,7 +537,6 @@ public class CrystalDungeon : PhysicsGame
             pelaaja1.IgnoresGravity = true;
         }
     }
-    
     
     
 }

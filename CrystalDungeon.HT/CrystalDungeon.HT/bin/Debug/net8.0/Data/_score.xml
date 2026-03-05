@@ -29,26 +29,26 @@
         </Item>
         <Item Index="3" Type="Jypeli.ScoreItem, Jypeli, Version=11.4.3.0, Culture=neutral, PublicKeyToken=null">
           <Field Name="Name" Type="System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
-            <Value>-</Value>
+            <Value>wwTesti1</Value>
           </Field>
           <Field Name="Score" Type="System.Double, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
-            <Value>0</Value>
+            <Value>49310</Value>
           </Field>
         </Item>
         <Item Index="4" Type="Jypeli.ScoreItem, Jypeli, Version=11.4.3.0, Culture=neutral, PublicKeyToken=null">
           <Field Name="Name" Type="System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
-            <Value>-</Value>
+            <Value>wwddwTesti1</Value>
           </Field>
           <Field Name="Score" Type="System.Double, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
-            <Value>0</Value>
+            <Value>30066</Value>
           </Field>
         </Item>
         <Item Index="5" Type="Jypeli.ScoreItem, Jypeli, Version=11.4.3.0, Culture=neutral, PublicKeyToken=null">
           <Field Name="Name" Type="System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
-            <Value>-</Value>
+            <Value>wwTesti1</Value>
           </Field>
           <Field Name="Score" Type="System.Double, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
-            <Value>0</Value>
+            <Value>14029</Value>
           </Field>
         </Item>
         <Item Index="6" Type="Jypeli.ScoreItem, Jypeli, Version=11.4.3.0, Culture=neutral, PublicKeyToken=null">
@@ -86,7 +86,7 @@
       </Array>
     </Field>
     <Field Name="LastEnteredName" Type="System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
-      <Value>Testi1</Value>
+      <Value>wwddwTesti1</Value>
     </Field>
   </Object>
 </State>
