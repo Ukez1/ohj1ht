@@ -9,17 +9,7 @@ using Jypeli.Widgets;
 /// 
 /// </summary>
 
-class Vihu : PlatformCharacter
-{
-    private IntMeter elamalaskuri = new IntMeter(3, 0, 3);
-    public  IntMeter Elamalaskuri { get { return elamalaskuri; } }
 
-    public Vihu(double leveys, double korkeus)
-        : base(leveys, korkeus)
-    {
-        elamalaskuri.LowerLimit += delegate { this.Destroy(); };
-    }
-}
 public class CrystalDungeon : PhysicsGame
 {
     private const double NOPEUS = 200;
@@ -28,6 +18,7 @@ public class CrystalDungeon : PhysicsGame
     private PlatformCharacter pelaaja1;
     private PlatformCharacter vihollinen;
     private PlatformCharacter pomo;
+    
     private Image[] kristalliAnimaatio = LoadImages("Kristalli1", "Kristalli2", "Kristalli3", "Kristalli4", "Kristalli5", "Kristalli6", "Kristalli7", "Kristalli8");
     private Image pelaajan1Kuva = LoadImage("pelaaja.png");
     private Image tippukiviKuva = LoadImage("Tippukivi.png");
@@ -58,6 +49,18 @@ public class CrystalDungeon : PhysicsGame
     {
         AloitaAlusta();
     }
+
+    public void VoititPelin()
+    {
+        double PelattuAika = aikalaskuri.SecondCounter.Value;
+        double JaanytTerveys = terveyslaskuri.Value * 10;
+        double PeliAika = 1000 / PelattuAika; //Mitä nopeammin pelattu, sitä enemmän saadaan pisteitä
+        pistelaskuri.MultiplyValue(PeliAika);
+        pistelaskuri.MultiplyValue(JaanytTerveys);
+        pelaaja1.Destroy();
+        topLista.EnterAndShow(pistelaskuri.Value);
+        topLista.HighScoreWindow.Closed += AloitaPeli;
+    }
     
 
     private void AloitaAlusta()
@@ -69,15 +72,11 @@ public class CrystalDungeon : PhysicsGame
         LuoTerveysLaskuri();
         LuoAikalaskuri();
         
-        //MediaPlayer.Play("taustaMusiikki");
-        //MediaPlayer.IsRepeating = true;
         Camera.Follow(pelaaja1);
         Camera.ZoomFactor = 1;
         Camera.StayInLevel = true;
         MasterVolume = 0.5;
         Gravity = new Vector(0, -1000);
-        
-        Timer.CreateAndStart(2, Paivita);
     }
     
     
@@ -122,12 +121,31 @@ public class CrystalDungeon : PhysicsGame
     }
     
 
-    private void Paivita()
+    //Aliohjelman avulla saadan vähennettyä toistoa koodissa tekemällä aliohjelma,
+    //joka tekee kaikille objekteille yhteiset asiat vaihtuvilla parametreilla.
+    public PhysicsObject LuoRakenne(Vector paikka, double leveys, double korkeus, Shape muoto, Color vari)
     {
-        
+        PhysicsObject objekti = PhysicsObject.CreateStaticObject(leveys, korkeus);
+        objekti.Color = vari;
+        objekti.Shape = muoto;
+        objekti.Position = paikka;
+        return objekti;
     }
 
 
+    //Saadan tälläkin poistettua toistoa luomalla labeleita hyödyntäen aliohjelmaa
+    public Label LuoLabeli(double x, double y, Color tekstivari, Color taustavari, string otsikko)
+    {
+        Label labeli = new Label();
+        labeli.X = Screen.Right - x;
+        labeli.Y = Screen.Top - y;
+        labeli.TextColor = tekstivari;
+        labeli.Color = taustavari;
+        labeli.Title = otsikko;
+        return labeli;
+    }
+
+    
     private void LisaaVihollinen(Vector paikka, double leveys, double korkeus)
     {
         vihollinen = new PlatformCharacter(leveys, korkeus);
@@ -140,9 +158,7 @@ public class CrystalDungeon : PhysicsGame
 
         PlatformWandererBrain tasoaivot = new PlatformWandererBrain(); //Saadaan vihu liikkumaan kentällä
         tasoaivot.Speed = 70;
-
         vihollinen.Brain = tasoaivot;
-
     }
     
     
@@ -173,19 +189,14 @@ public class CrystalDungeon : PhysicsGame
     
     private void LisaaTaso2(Vector paikka, double leveys, double korkeus)
     {
-        PhysicsObject taso2 = PhysicsObject.CreateStaticObject(leveys, korkeus);
-        taso2.Position = paikka;
-        taso2.Color = Color.DarkGray;
+        PhysicsObject taso2 = LuoRakenne(paikka, leveys, korkeus, Shape.Rectangle, Color.DarkGray);
         Add(taso2);
     }
     
     
     private void LisaaPiikki(Vector paikka, double leveys, double korkeus)
     {
-        PhysicsObject piikki = PhysicsObject.CreateStaticObject(leveys, korkeus);
-        piikki.Position = paikka;
-        piikki.Shape = Shape.Triangle;
-        piikki.Color = Color.HotPink;
+        PhysicsObject piikki = LuoRakenne(paikka, leveys, korkeus, Shape.Triangle, Color.HotPink);
         piikki.Image = piikkiKuva;
         piikki.Tag = "piikki";
         Add(piikki);
@@ -194,10 +205,7 @@ public class CrystalDungeon : PhysicsGame
     
     private void LisaaIsoPiikki(Vector paikka, double leveys, double korkeus)
     {
-        PhysicsObject isoPiikki = PhysicsObject.CreateStaticObject(leveys, korkeus);
-        isoPiikki.Position = paikka;
-        isoPiikki.Shape = Shape.Triangle;
-        isoPiikki.Color = Color.BloodRed;
+        PhysicsObject isoPiikki = LuoRakenne(paikka, leveys, korkeus, Shape.Triangle, Color.BloodRed);
         isoPiikki.Tag = "tappava";
         Add(isoPiikki);
     }
@@ -233,26 +241,20 @@ public class CrystalDungeon : PhysicsGame
 
     private void LisaaKristalli(Vector paikka, double leveys, double korkeus)
     {
-        PhysicsObject kristalli = PhysicsObject.CreateStaticObject(leveys, korkeus);
+        PhysicsObject kristalli = LuoRakenne(paikka, leveys, korkeus, Shape.Rectangle, Color.HotPink);
         kristalli.IgnoresCollisionResponse = true;
-        kristalli.Position = paikka;
         kristalli.Animation = new Animation(kristalliAnimaatio);
         kristalli.Animation.Start();
         kristalli.Animation.FPS = 8;
         kristalli.Tag = "kristalli";
         Add(kristalli);
-        
-        arpa = RandomGen.SelectOne(1, 2, 3, 4, 5);
     }
     
     
     private void LisaaSydan(Vector paikka, double leveys, double korkeus)
     {
-        PhysicsObject sydan = PhysicsObject.CreateStaticObject(leveys, korkeus);
+        PhysicsObject sydan = LuoRakenne(paikka, leveys, korkeus, Shape.Heart, Color.Red);
         sydan.IgnoresCollisionResponse = true;
-        sydan.Position = paikka;
-        sydan.Shape = Shape.Heart;
-        sydan.Color = Color.Red;
         sydan.Tag = "sydan";
         Add(sydan);
     }
@@ -260,9 +262,7 @@ public class CrystalDungeon : PhysicsGame
     
     private void LisaaLiikkuvaTaso(Vector paikka, double leveys, double korkeus)
     {
-        PhysicsObject liikkuvataso = PhysicsObject.CreateStaticObject(leveys, korkeus/2);
-        liikkuvataso.Position = paikka;
-        liikkuvataso.Color = Color.Charcoal;
+        PhysicsObject liikkuvataso = LuoRakenne(paikka, leveys, korkeus/2, Shape.Rectangle, Color.Charcoal);
         liikkuvataso.IgnoresGravity = true;
         liikkuvataso.Oscillate(Vector.UnitY, 150, 0.2); //Tekee liikkeen
         liikkuvataso.Image = liikkuvaTasoKuva;
@@ -272,9 +272,7 @@ public class CrystalDungeon : PhysicsGame
     
     private void LisaaMurskain(Vector paikka, double leveys, double korkeus)
     {
-        PhysicsObject murskain = PhysicsObject.CreateStaticObject(leveys, korkeus);
-        murskain.Position = paikka;
-        murskain.Color = Color.Black;
+        PhysicsObject murskain = LuoRakenne(paikka, leveys, korkeus, Shape.Rectangle, Color.Black);
         murskain.IgnoresGravity = true;
         murskain.Oscillate(Vector.UnitY, 160, 0.1); //Tekee liikkeen
         murskain.Tag = "tappava";
@@ -284,14 +282,8 @@ public class CrystalDungeon : PhysicsGame
 
     public void LuoPistelaskuri()
     {
-        pistelaskuri = new IntMeter(0);               
-
-        Label pistetaulukko = new Label(); 
-        pistetaulukko.X = Screen.Right - 100;
-        pistetaulukko.Y = Screen.Top - 50;
-        pistetaulukko.TextColor = Color.Black;
-        pistetaulukko.Color = Color.White;
-        pistetaulukko.Title = "Pisteet: ";
+        pistelaskuri = new IntMeter(0);
+        Label pistetaulukko = LuoLabeli(100, 50, Color.Black, Color.White, "Pisteet: ");
         pistetaulukko.BindTo(pistelaskuri);
         Add(pistetaulukko);
     }
@@ -301,19 +293,13 @@ public class CrystalDungeon : PhysicsGame
     {
         terveyslaskuri= new IntMeter(5, 0, 10);
         terveyslaskuri.LowerLimit += PelaajaKuoli; //Kun laskuri saa pienimmän arvon eli 0, pelaaja kuolee.
-        
-        Label pelaajanTerveys = new Label(); 
-        pelaajanTerveys.X = Screen.Right - 100;
-        pelaajanTerveys.Y = Screen.Top - 70;
-        pelaajanTerveys.TextColor = Color.Black;
-        pelaajanTerveys.Color = Color.White;
-        pelaajanTerveys.Title = "Terveys: ";
+        Label pelaajanTerveys = LuoLabeli(100, 70, Color.Black, Color.White, "Terveys: ");
         pelaajanTerveys.BindTo(terveyslaskuri);
         Add(pelaajanTerveys);
         
         ProgressBar elamapalkki = new ProgressBar(150, 20);
         elamapalkki.X = Screen.Right - 100;
-        elamapalkki.Y = Screen.Top - 70;
+        elamapalkki.Y = Screen.Top - 90;
         elamapalkki.BarColor = Color.Red;
         elamapalkki.Color = Color.Transparent;
         elamapalkki.BorderColor = Color.Black;
@@ -327,11 +313,7 @@ public class CrystalDungeon : PhysicsGame
         aikalaskuri = new Timer();
         aikalaskuri.Start();
 
-        Label aikanaytto = new Label();
-        aikanaytto.X = Screen.Right - 100;
-        aikanaytto.Y = Screen.Top - 30;
-        aikanaytto.TextColor = Color.Black;
-        aikanaytto.Color = Color.White;
+        Label aikanaytto = LuoLabeli(100, 30, Color.Black, Color.White, "Aika: ");
         aikanaytto.DecimalPlaces = 1;
         aikanaytto.BindTo(aikalaskuri.SecondCounter);
         Add(aikanaytto);
@@ -374,19 +356,17 @@ public class CrystalDungeon : PhysicsGame
         pomo.Tag = "pomo";
         Add(pomo);
 
-        PlatformWandererBrain pomoaivot = new PlatformWandererBrain(); //Saadaan pomo liikkumaan kentällä
+        //Aivojen tekeminen, jolla saadan liike
+        PlatformWandererBrain pomoaivot = new PlatformWandererBrain();
         pomoaivot.FallsOffPlatforms = true;
         pomoaivot.TriesToJump = true;
         pomoaivot.JumpSpeed = 100;
         pomoaivot.Speed = 50;
-
         pomo.Brain = pomoaivot;
         
         pomoAse = new Cannon(30, 10);
         pomo.Add(pomoAse);
         pomoAse.FireRate = 1;
-        //pelaaja1Ase.ProjectileCollision = AmmusOsui;
-        //pelaaja1Ase.ProjectileCollision = Ammusosuipomoon;
         pomoAse.Position = pomo.Position + new Vector(pomo.Width / 2, 0);
         pomoAse.MaxAmmoLifetime = TimeSpan.FromSeconds(3);
         pomoAse.CanHitOwner = true;
@@ -414,9 +394,6 @@ public class CrystalDungeon : PhysicsGame
 
     private void LisaaNappaimet()
     {
-        Keyboard.Listen(Key.F1, ButtonState.Pressed, ShowControlHelp, "Näytä ohjeet");
-        Keyboard.Listen(Key.Escape, ButtonState.Pressed, ConfirmExit, "Lopeta peli");
-        
         //Liikkuminen:
         Keyboard.Listen(Key.A, ButtonState.Down, Liikuta, "Liikkuu vasemmalle", pelaaja1, -NOPEUS);
         Keyboard.Listen(Key.D, ButtonState.Down, Liikuta, "Liikkuu vasemmalle", pelaaja1, NOPEUS);
@@ -425,9 +402,11 @@ public class CrystalDungeon : PhysicsGame
         Keyboard.Listen(Key.Space, ButtonState.Down, Hyppaa, "", pelaaja1, HYPPYNOPEUS);
         
         //Muut näppäimet:
-        Keyboard.Listen(Key.R, ButtonState.Down, AloitaAlusta, "Aloittaa pelin alusta");
+        Keyboard.Listen(Key.R, ButtonState.Down, AloitaAlusta, "Aloittaa pelin alusta"); //Ei tarvitse ajaa peliä uudelleen, jos haluaa aloittaa alusta
         Keyboard.Listen(Key.LeftShift, ButtonState.Pressed, AktivoiHuijaukset, "");
         Mouse.Listen(MouseButton.Left, ButtonState.Down, Ammu, "Kutsuu loitsun");
+        Keyboard.Listen(Key.H, ButtonState.Pressed, ShowControlHelp, "Näytä ohjeet");
+        Keyboard.Listen(Key.Escape, ButtonState.Pressed, ConfirmExit, "Lopeta peli");
     }
     
 
@@ -491,20 +470,17 @@ public class CrystalDungeon : PhysicsGame
     
     private void PelaajaKuoli()
     {
-        double PelattuAika = aikalaskuri.SecondCounter.Value;
-        double PeliAika = 1000 / PelattuAika; //Mitä nopeammin pelattu, sitä enemmän saadaan pisteitä
-        pistelaskuri.MultiplyValue(PeliAika);
-        
         pelaaja1.Destroy();
         topLista.EnterAndShow(pistelaskuri.Value);
         topLista.HighScoreWindow.Closed += AloitaPeli;
-        
     }
+    
 
     private void PomoKuoli()
     {
         pomo.Destroy();
         pistelaskuri.AddOverTime(kerroin*10000, 10);
+        VoititPelin();
     }
     
     

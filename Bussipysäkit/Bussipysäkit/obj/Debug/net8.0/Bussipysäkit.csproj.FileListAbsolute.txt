@@ -1,0 +1,15 @@
+C:\Users\gr313135\ohj1ht\Bussipysäkit\Bussipysäkit\bin\Debug\net8.0\Bussipysäkit.exe
+C:\Users\gr313135\ohj1ht\Bussipysäkit\Bussipysäkit\bin\Debug\net8.0\Bussipysäkit.deps.json
+C:\Users\gr313135\ohj1ht\Bussipysäkit\Bussipysäkit\bin\Debug\net8.0\Bussipysäkit.runtimeconfig.json
+C:\Users\gr313135\ohj1ht\Bussipysäkit\Bussipysäkit\bin\Debug\net8.0\Bussipysäkit.dll
+C:\Users\gr313135\ohj1ht\Bussipysäkit\Bussipysäkit\bin\Debug\net8.0\Bussipysäkit.pdb
+C:\Users\gr313135\ohj1ht\Bussipysäkit\Bussipysäkit\obj\Debug\net8.0\Bussipysäkit.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\gr313135\ohj1ht\Bussipysäkit\Bussipysäkit\obj\Debug\net8.0\Bussipysäkit.AssemblyInfoInputs.cache
+C:\Users\gr313135\ohj1ht\Bussipysäkit\Bussipysäkit\obj\Debug\net8.0\Bussipysäkit.AssemblyInfo.cs
+C:\Users\gr313135\ohj1ht\Bussipysäkit\Bussipysäkit\obj\Debug\net8.0\Bussipysäkit.csproj.CoreCompileInputs.cache
+C:\Users\gr313135\ohj1ht\Bussipysäkit\Bussipysäkit\obj\Debug\net8.0\Bussipysäkit.sourcelink.json
+C:\Users\gr313135\ohj1ht\Bussipysäkit\Bussipysäkit\obj\Debug\net8.0\Bussipysäkit.dll
+C:\Users\gr313135\ohj1ht\Bussipysäkit\Bussipysäkit\obj\Debug\net8.0\refint\Bussipysäkit.dll
+C:\Users\gr313135\ohj1ht\Bussipysäkit\Bussipysäkit\obj\Debug\net8.0\Bussipysäkit.pdb
+C:\Users\gr313135\ohj1ht\Bussipysäkit\Bussipysäkit\obj\Debug\net8.0\Bussipysäkit.genruntimeconfig.cache
+C:\Users\gr313135\ohj1ht\Bussipysäkit\Bussipysäkit\obj\Debug\net8.0\ref\Bussipysäkit.dll
