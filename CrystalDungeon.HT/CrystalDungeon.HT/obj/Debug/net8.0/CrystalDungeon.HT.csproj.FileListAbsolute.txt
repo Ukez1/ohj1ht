@@ -142,3 +142,4 @@ C:\Users\gr313135\ohj1ht\CrystalDungeon.HT\CrystalDungeon.HT\obj\Debug\net8.0\re
 C:\Users\gr313135\ohj1ht\CrystalDungeon.HT\CrystalDungeon.HT\obj\Debug\net8.0\CrystalDungeon.HT.pdb
 C:\Users\gr313135\ohj1ht\CrystalDungeon.HT\CrystalDungeon.HT\obj\Debug\net8.0\CrystalDungeon.HT.genruntimeconfig.cache
 C:\Users\gr313135\ohj1ht\CrystalDungeon.HT\CrystalDungeon.HT\obj\Debug\net8.0\ref\CrystalDungeon.HT.dll
+C:\Users\gr313135\ohj1ht\CrystalDungeon.HT\CrystalDungeon.HT\bin\Debug\net8.0\Content\Piikki2.png
