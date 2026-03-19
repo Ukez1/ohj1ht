@@ -51,18 +51,34 @@ public class CrystalDungeon : PhysicsGame
     
     public override void Begin()
     {
-        AloitaAlusta();
+        AloitaPeli();
     }
+
     
-    
-    private void AloitaPeli(Window sender)
+    /// <summary>
+    /// Luo alkuvalikon, josta pääsee näkemään top10-listan, aloittamaan pelin ja lopettamaan pelaamisen.
+    /// </summary>
+    private void AloitaPeli(Window sender=null)
     {
-        AloitaAlusta();
+        ClearAll();
+        Level.Background.Color = Color.LightGray;
+        MultiSelectWindow alkuvalikko = new MultiSelectWindow("Tervetuloa peliin", "Aloita peli", "Parhaat pisteet", "Lopeta");
+        alkuvalikko.Color = Color.Transparent;
+        alkuvalikko.SetButtonColor(Color.DarkAzure);
+        alkuvalikko.SetButtonTextColor(Color.White);
+        alkuvalikko.CapturesMouse = false;
+        Add(alkuvalikko);
+        alkuvalikko.AddItemHandler(0, AloitaAlusta);
+        alkuvalikko.AddItemHandler(1, topLista.Show);
+        alkuvalikko.AddItemHandler(2, Exit);
+        topLista.Text = "Parhaat pisteet:";
+        topLista.Color = Color.Azure;
+        topLista.HighScoreWindow.Closed += AloitaPeli; //Kun top10-lista suljetaan, mennään takaisin alkuvalikkoon.
     }
     
 
     /// <summary>
-    /// Aloittaa pelin kutsumalla kaikki tarpeelliset aliohjelmat.
+    /// Aloittaa pelin kutsumalla kaikki tarpeelliset aliohjelmat pelin pelaamiseen.
     /// </summary>
     private void AloitaAlusta()
     {
@@ -240,7 +256,7 @@ public class CrystalDungeon : PhysicsGame
     
     private void LisaaLiikkuvaTaso(Vector paikka, double leveys, double korkeus)
     {
-        PhysicsObject liikkuvataso = LuoRakenne(paikka, leveys, korkeus/2, Shape.Rectangle, Color.Charcoal);
+        PhysicsObject liikkuvataso = LuoRakenne(paikka, leveys*2, korkeus/2, Shape.Rectangle, Color.Charcoal);
         liikkuvataso.IgnoresGravity = true;
         liikkuvataso.Oscillate(Vector.UnitY, 150, 0.2); //Tekee liikkeen värähtelemällä
         liikkuvataso.Image = liikkuvaTasoKuva;
@@ -261,6 +277,9 @@ public class CrystalDungeon : PhysicsGame
     }
     
 
+    /// <summary>
+    /// Luo pistelaskurin, joka laskee pisteitä tuhoamalla vihuja, keräämällä kristalleja ja sydämiä. 
+    /// </summary>
     public void LuoPistelaskuri()
     {
         pistelaskuri = new IntMeter(0);
@@ -271,6 +290,10 @@ public class CrystalDungeon : PhysicsGame
     }
     
     
+    /// <summary>
+    /// Luo terveyslaskurin, jonka arvo kertoo pelaajan terveyden. Terveyslaskurin arvo vähenee, kun pelaaja osuu piikkeihin tai vihuihin.
+    /// Terveyttä saa lisää keräämällä sydämiä. Kun laskurin arvo menee 0, pelaaja kuolee.
+    /// </summary>
     public void LuoTerveysLaskuri()
     {
         terveyslaskuri= new IntMeter(MaxTerveys/2, 0, MaxTerveys);
@@ -292,6 +315,9 @@ public class CrystalDungeon : PhysicsGame
     }
     
     
+    /// <summary>
+    /// Luo aikalaskurin, joka kertoo kaunko peliä on pelattu kyseisellä yrityksellä.
+    /// </summary>
     public void LuoAikalaskuri()
     {
         aikalaskuri = new Timer();
@@ -400,6 +426,8 @@ public class CrystalDungeon : PhysicsGame
     private void Tuhoavihut()
     {
         int vihujenmaara = vihut.Count;
+        terveyslaskuri.AddValue(10);
+        MessageDisplay.Add("Parannuit täysin!");
 
         if (vihujenmaara > 0)
         {
@@ -411,6 +439,10 @@ public class CrystalDungeon : PhysicsGame
     }
     
 
+    /// <summary>
+    /// Näppäimet tehdään käyttäen Keyboard.Listen -toimintoa. Kun painaa tiettyä nappia siirrytään
+    /// haluttuun aliohjelmaan oikeilla parametreilla, jos niitä tarvitaan.
+    /// </summary>
     private void LisaaNappaimet()
     {
         //Liikkuminen:
@@ -488,6 +520,7 @@ public class CrystalDungeon : PhysicsGame
         maaliAani.Play();
         MessageDisplay.Add("Keräsit kristallin!");
         pistelaskuri.AddOverTime(500*kerroin, 0.5);
+        kristallit.Remove(kristallikohde);
         kristallikohde.Destroy();
     }
     
@@ -519,6 +552,7 @@ public class CrystalDungeon : PhysicsGame
     private void PelaajaKuoli()
     {
         pelaaja1.Destroy();
+        topLista.Text = "Kuolit yritä uudelleen!";
         topLista.EnterAndShow(pistelaskuri.Value);
         topLista.HighScoreWindow.Closed += AloitaPeli;
     }
@@ -574,15 +608,13 @@ public class CrystalDungeon : PhysicsGame
     /// </summary>
     public void VoititPelin()
     {
-        Label voittoOtsikko = LuoLabeli(200, 0, Color.Gold, Color.Transparent, "Onneksi olkoon, Voitit pelin!");
-        Add(voittoOtsikko);
-        
         double pelattuAika = aikalaskuri.SecondCounter.Value;
         double jaanytTerveys = terveyslaskuri.Value * 10;
         double peliAika = 1000 / pelattuAika; //Mitä nopeammin pelattu, sitä enemmän saadaan pisteitä
         pistelaskuri.MultiplyValue(peliAika);
         pistelaskuri.MultiplyValue(jaanytTerveys);
         pelaaja1.Destroy();
+        topLista.Text = "Onneksi olkoon, voitit pelin!";
         topLista.EnterAndShow(pistelaskuri.Value);
         topLista.HighScoreWindow.Closed += AloitaPeli;
     }
