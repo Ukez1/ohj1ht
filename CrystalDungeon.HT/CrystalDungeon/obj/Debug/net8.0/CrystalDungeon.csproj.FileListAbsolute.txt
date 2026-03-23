@@ -15,10 +15,7 @@ C:\Users\gr313135\ohj1ht\CrystalDungeon.HT\CrystalDungeon\bin\Debug\net8.0\Conte
 C:\Users\gr313135\ohj1ht\CrystalDungeon.HT\CrystalDungeon\bin\Debug\net8.0\Content\norsu.png
 C:\Users\gr313135\ohj1ht\CrystalDungeon.HT\CrystalDungeon\bin\Debug\net8.0\Content\Piikki.png
 C:\Users\gr313135\ohj1ht\CrystalDungeon.HT\CrystalDungeon\bin\Debug\net8.0\Content\Piikki2.png
-C:\Users\gr313135\ohj1ht\CrystalDungeon.HT\CrystalDungeon\bin\Debug\net8.0\Content\tahti.png
-C:\Users\gr313135\ohj1ht\CrystalDungeon.HT\CrystalDungeon\bin\Debug\net8.0\Content\taysipalkki.png
 C:\Users\gr313135\ohj1ht\CrystalDungeon.HT\CrystalDungeon\bin\Debug\net8.0\Content\Tippukivi.png
-C:\Users\gr313135\ohj1ht\CrystalDungeon.HT\CrystalDungeon\bin\Debug\net8.0\Content\tyhjapalkki.png
 C:\Users\gr313135\ohj1ht\CrystalDungeon.HT\CrystalDungeon\bin\Debug\net8.0\CrystalDungeon.deps.json
 C:\Users\gr313135\ohj1ht\CrystalDungeon.HT\CrystalDungeon\bin\Debug\net8.0\CrystalDungeon.runtimeconfig.json
 C:\Users\gr313135\ohj1ht\CrystalDungeon.HT\CrystalDungeon\bin\Debug\net8.0\CrystalDungeon.dll
@@ -71,8 +68,9 @@ C:\Users\gr313135\ohj1ht\CrystalDungeon.HT\CrystalDungeon\obj\Debug\net8.0\refin
 C:\Users\gr313135\ohj1ht\CrystalDungeon.HT\CrystalDungeon\obj\Debug\net8.0\CrystalDungeon.pdb
 C:\Users\gr313135\ohj1ht\CrystalDungeon.HT\CrystalDungeon\obj\Debug\net8.0\CrystalDungeon.genruntimeconfig.cache
 C:\Users\gr313135\ohj1ht\CrystalDungeon.HT\CrystalDungeon\obj\Debug\net8.0\ref\CrystalDungeon.dll
-C:\Users\gr313135\ohj1ht\CrystalDungeon.HT\CrystalDungeon\bin\Debug\net8.0\Content\sauva.png
 C:\Users\gr313135\ohj1ht\CrystalDungeon.HT\CrystalDungeon\bin\Debug\net8.0\Content\Vihu1.png
 C:\Users\gr313135\ohj1ht\CrystalDungeon.HT\CrystalDungeon\bin\Debug\net8.0\Content\Vihu2.png
 C:\Users\gr313135\ohj1ht\CrystalDungeon.HT\CrystalDungeon\bin\Debug\net8.0\Content\Vihu3.png
 C:\Users\gr313135\ohj1ht\CrystalDungeon.HT\CrystalDungeon\bin\Debug\net8.0\Content\Pomoase.png
+C:\Users\gr313135\ohj1ht\CrystalDungeon.HT\CrystalDungeon\bin\Debug\net8.0\Content\sauva2.png
+C:\Users\gr313135\ohj1ht\CrystalDungeon.HT\CrystalDungeon\bin\Debug\net8.0\Content\sauva1.png
