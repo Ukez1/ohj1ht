@@ -4,15 +4,15 @@ using Jypeli;
 using Jypeli.Assets;
 using Jypeli.Widgets;
 
-/// @author gr313135
+namespace CrystalDungeon.HT
+{
+    /// @author gr313135
 /// @version 18.11.2025
 /// <summary>
 /// Tasohyppelypeli, jossa väistellään esteitä, tuhotaan vihuja, kerätään kristalleja ja pyritään voittamaan pomo.
 /// Saat pisteitä keräämällä kristalleja, tuhoamalla vihuja, vahingoittamalla pomoa ja keräämällä terveyspisteitä.
 /// </summary>
-
-
-public class CrystalDungeon : PhysicsGame
+public class CrystalDungeonPeli : PhysicsGame
 {
     private const int Liikenopeus = 200;
     private const int Hyppynopeus = 650;
@@ -692,3 +692,5 @@ public class CrystalDungeon : PhysicsGame
         topLista.HighScoreWindow.Closed += AloitaPeli;
     }
 }
+}
+
