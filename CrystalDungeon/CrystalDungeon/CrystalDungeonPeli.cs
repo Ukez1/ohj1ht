@@ -22,7 +22,6 @@ public class CrystalDungeonPeli : PhysicsGame
     private const int Sydanarvo = 250;
     private const int Kristalliarvo = 500;
     private PlatformCharacter pelaaja1;
-    private PlatformCharacter vihollinen;
     private PlatformCharacter pomo;
     private List<PlatformCharacter> vihut = new List<PlatformCharacter>();
     private List<PhysicsObject> kristallit = new List<PhysicsObject>();
@@ -156,6 +155,12 @@ public class CrystalDungeonPeli : PhysicsGame
     }
     
     
+    /// <summary>
+    /// Luo tason
+    /// </summary>
+    /// <param name="paikka"></param>
+    /// <param name="leveys"></param>
+    /// <param name="korkeus"></param>
     private void LisaaTaso(Vector paikka, double leveys, double korkeus)
     {
         GameObject taso = new GameObject(leveys, korkeus);
@@ -165,6 +170,12 @@ public class CrystalDungeonPeli : PhysicsGame
     }
     
     
+    /// <summary>
+    /// LUo tason, joka fysiikkaolio
+    /// </summary>
+    /// <param name="paikka"></param>
+    /// <param name="leveys"></param>
+    /// <param name="korkeus"></param>
     private void LisaaTaso2(Vector paikka, double leveys, double korkeus)
     {
         PhysicsObject taso2 = LuoRakenne(paikka, leveys, korkeus, Shape.Rectangle, Color.DarkGray);
@@ -172,6 +183,12 @@ public class CrystalDungeonPeli : PhysicsGame
     }
     
     
+    /// <summary>
+    /// Luo piikin, johon pelaaja saatta törmätä
+    /// </summary>
+    /// <param name="paikka"></param>
+    /// <param name="leveys"></param>
+    /// <param name="korkeus"></param>
     private void LisaaPiikki(Vector paikka, double leveys, double korkeus)
     {
         PhysicsObject piikki = LuoRakenne(paikka, leveys, korkeus, Shape.Triangle, Color.HotPink);
@@ -179,8 +196,14 @@ public class CrystalDungeonPeli : PhysicsGame
         piikki.Tag = "piikki";
         Add(piikki);
     }
-    
-    
+
+
+    /// <summary>
+    /// Luo erilaisen piikin, johon osuessa pelaaja tuhoutuu välittömästi.
+    /// </summary>
+    /// <param name="paikka"></param>
+    /// <param name="leveys"></param>
+    /// <param name="korkeus"></param>
     private void LisaaIsoPiikki(Vector paikka, double leveys, double korkeus)
     {
         PhysicsObject isoPiikki = LuoRakenne(paikka, leveys, korkeus, Shape.Triangle, Color.BloodRed);
@@ -190,6 +213,12 @@ public class CrystalDungeonPeli : PhysicsGame
     }
     
     
+    /// <summary>
+    /// Luo katossa olevan erilaisen piikin
+    /// </summary>
+    /// <param name="paikka"></param>
+    /// <param name="leveys"></param>
+    /// <param name="korkeus"></param>
     private void LisaaTippukivi(Vector paikka, double leveys, double korkeus)
     {
         PhysicsObject tippukivi = LuoRakenne(paikka, leveys, korkeus, Shape.Rectangle, Color.Wheat);
@@ -199,6 +228,13 @@ public class CrystalDungeonPeli : PhysicsGame
     }
     
 
+    /// <summary>
+    /// Luo keärttävän kristallin, josta saa pisteitä.
+    /// Kristallista voi muuttua vihollinen, jos sitä ei olla kerätty.
+    /// </summary>
+    /// <param name="paikka"></param>
+    /// <param name="leveys"></param>
+    /// <param name="korkeus"></param>
     private void LisaaKristalli(Vector paikka, double leveys, double korkeus)
     {
         kristalli = LuoRakenne(paikka, leveys, korkeus, Shape.Rectangle, Color.HotPink);
@@ -212,6 +248,12 @@ public class CrystalDungeonPeli : PhysicsGame
     }
     
     
+    /// <summary>
+    /// Luo kerättävän sydämen, jonka keräämisestä saa lisää terveyttä.
+    /// </summary>
+    /// <param name="paikka"></param>
+    /// <param name="leveys"></param>
+    /// <param name="korkeus"></param>
     private void LisaaSydan(Vector paikka, double leveys, double korkeus)
     {
         PhysicsObject sydan = LuoRakenne(paikka, leveys, korkeus, Shape.Heart, Color.MediumBlue);
@@ -220,6 +262,13 @@ public class CrystalDungeonPeli : PhysicsGame
         Add(sydan);
     }
     
+    
+    /// <summary>
+    /// Luo kerättävän aseen, jonka keräämisen jälkeen voidaan vaihtaa ase toiseksi.
+    /// </summary>
+    /// <param name="paikka"></param>
+    /// <param name="leveys"></param>
+    /// <param name="korkeus"></param>
     private void LisaaAse1(Vector paikka, double leveys, double korkeus)
     {
         PhysicsObject ase1 = LuoRakenne(paikka, leveys, korkeus, Shape.Heart, Color.MediumBlue);
@@ -230,6 +279,12 @@ public class CrystalDungeonPeli : PhysicsGame
     }
     
     
+    /// <summary>
+    /// Lisätään liikkuva taso, joka liikku värähtelemällä.
+    /// </summary>
+    /// <param name="paikka"></param>
+    /// <param name="leveys"></param>
+    /// <param name="korkeus"></param>
     private void LisaaLiikkuvaTaso(Vector paikka, double leveys, double korkeus)
     {
         PhysicsObject liikkuvataso = LuoRakenne(paikka, leveys*2, korkeus/2, Shape.Rectangle, Color.Charcoal);
@@ -240,6 +295,13 @@ public class CrystalDungeonPeli : PhysicsGame
     }
     
     
+    /// <summary>
+    /// Lisätään liikkuva murskain, johon osuessa pelaaja tuhoutuu välittömästi
+    /// Murskain liikku värähtelemällä. 
+    /// </summary>
+    /// <param name="paikka"></param>
+    /// <param name="leveys"></param>
+    /// <param name="korkeus"></param>
     private void LisaaMurskain(Vector paikka, double leveys, double korkeus)
     {
         PhysicsObject murskain = LuoRakenne(paikka, leveys*1.9, korkeus*1.9, Shape.Rectangle, Color.Black);
@@ -306,16 +368,29 @@ public class CrystalDungeonPeli : PhysicsGame
     }
     
     
+    /// <summary>
+    /// Luodaan vihollinen hyödyntäen luovihollinen aliohjelmaa.
+    /// </summary>
+    /// <param name="paikka"></param>
+    /// <param name="leveys"></param>
+    /// <param name="korkeus"></param>
     private void LisaaVihollinen(Vector paikka, double leveys, double korkeus)
     {
-        vihollinen = LuoVihollinen(paikka, leveys, korkeus);
+        PlatformCharacter vihollinen = LuoVihollinen(paikka, leveys, korkeus);
         Add(vihollinen);
     }
 
 
+    /// <summary>
+    /// Luodaan vihollinen, jolle lisätään aivot
+    /// </summary>
+    /// <param name="paikka"></param>
+    /// <param name="leveys"></param>
+    /// <param name="korkeus"></param>
+    /// <returns></returns>
     private PlatformCharacter LuoVihollinen(Vector paikka, double leveys, double korkeus)
     {
-        vihollinen = new PlatformCharacter(leveys*2, korkeus*2);
+        PlatformCharacter vihollinen = new PlatformCharacter(leveys*2, korkeus*2);
         vihollinen.Position = paikka;
         vihollinen.Mass = 5.0;
         vihollinen.Shape = Shape.Circle;
@@ -332,6 +407,9 @@ public class CrystalDungeonPeli : PhysicsGame
     }
     
     
+    /// <summary>
+    /// Muutetaan kristallit vholliseksi, kun jokin toinen vihollinen tuhotaan.
+    /// </summary>
     private void Muutavihut()
     {
         if (muutetut < kristallit.Count)
@@ -455,7 +533,11 @@ public class CrystalDungeonPeli : PhysicsGame
         ase.CanHitOwner = true;
         return ase;
     }
+
     
+    /// <summary>
+    /// Tuhataan kaikki netälle jääneet viholliset, kun pomon elämälaskuri on laskenut tarpeeksi alhaiseksi.
+    /// </summary>
     private void Tuhoavihut()
     {
         int vihujenmaara = vihut.Count;
@@ -516,6 +598,9 @@ public class CrystalDungeonPeli : PhysicsGame
     }
     
     
+    /// <summary>
+    /// Luodaan fysiikkaolio pelaajan aseen ampumis toiminnolla
+    /// </summary>
     private void Ammu()
     {
         PhysicsObject ammus = pelaaja1Ase.Shoot();
@@ -557,6 +642,9 @@ public class CrystalDungeonPeli : PhysicsGame
     }
 
 
+    /// <summary>
+    /// Pomo ampuu, kun pelaaja aiheuttaa vahinkoa pomolle
+    /// </summary>
     private void PomoAmpuu()
     {
         PhysicsObject kuula = pomoAse.Shoot();
@@ -608,6 +696,11 @@ public class CrystalDungeonPeli : PhysicsGame
     }
     
     
+    /// <summary>
+    /// Pelaaja törmää kohteeseen ja pelaajan terveydestä vähennetään 1 osuman yhteydssä
+    /// </summary>
+    /// <param name="hahmo">Pelaaja joka osui johonkin</param>
+    /// <param name="osuttu">KOhde johon pelaaja osui</param>
     private void Osui(PhysicsObject hahmo, PhysicsObject osuttu)
     {
         MessageDisplay.Add("Autss...");
@@ -615,6 +708,11 @@ public class CrystalDungeonPeli : PhysicsGame
     }
     
     
+    /// <summary>
+    /// Pelaaja osui ibjektiin, jonka tag oli "tappava", jolloin pelaaja tuhoutuu suoraan
+    /// </summary>
+    /// <param name="hahmo">Pelaaja, joka osui johonkin</param>
+    /// <param name="tappava">KOhde johon pelaaja osui</param>
     private void OsuiKuolettavasti(PhysicsObject hahmo, PhysicsObject tappava)
     {
         MessageDisplay.Add("Kuolit!");
@@ -622,6 +720,10 @@ public class CrystalDungeonPeli : PhysicsGame
     }
     
     
+    /// <summary>
+    /// Ohjelma, johon siirrytään, kun terveyslaksurin arvo on 0.
+    /// Aloittaa pelin alusta, kun on näyttänyt toplistan.
+    /// </summary>
     private void PelaajaKuoli()
     {
         pelaaja1.Destroy();
@@ -632,6 +734,10 @@ public class CrystalDungeonPeli : PhysicsGame
     }
     
 
+    /// <summary>
+    /// ALiohejlmaan siirrytään, kun pomon elämälaskuri saavuttaa arvon 0.
+    /// Peli lopuu tähän ja pistetaulukko tulee näkyviin.
+    /// </summary>
     private void PomoKuoli()
     {
         pomo.Destroy();
@@ -641,7 +747,7 @@ public class CrystalDungeonPeli : PhysicsGame
     
     
     /// <summary>
-    /// TArkistetaan, mihin ammus osui ja suoritetaan halutut komennot sen mukaan.
+    /// Tarkistetaan, mihin ammus osui ja suoritetaan halutut komennot sen mukaan.
     /// </summary>
     /// <param name="ammus">pelaajan aseen tuottama ammus</param>
     /// <param name="kohde">kohde, johon ammus osui, jonka mukaan suoritetaan halutut toiminnot</param>

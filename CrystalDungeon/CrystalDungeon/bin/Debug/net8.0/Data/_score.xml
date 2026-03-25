@@ -61,13 +61,21 @@
         </Item>
         <Item Index="7" Type="Jypeli.ScoreItem, Jypeli, Version=11.4.3.0, Culture=neutral, PublicKeyToken=null">
           <Field Name="Name" Type="System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
+            <Value>LAuri</Value>
+          </Field>
+          <Field Name="Score" Type="System.Double, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
+            <Value>14364000</Value>
+          </Field>
+        </Item>
+        <Item Index="8" Type="Jypeli.ScoreItem, Jypeli, Version=11.4.3.0, Culture=neutral, PublicKeyToken=null">
+          <Field Name="Name" Type="System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
             <Value>Kala</Value>
           </Field>
           <Field Name="Score" Type="System.Double, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
             <Value>817134</Value>
           </Field>
         </Item>
-        <Item Index="8" Type="Jypeli.ScoreItem, Jypeli, Version=11.4.3.0, Culture=neutral, PublicKeyToken=null">
+        <Item Index="9" Type="Jypeli.ScoreItem, Jypeli, Version=11.4.3.0, Culture=neutral, PublicKeyToken=null">
           <Field Name="Name" Type="System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
             <Value>Testi1</Value>
           </Field>
@@ -75,18 +83,10 @@
             <Value>750000</Value>
           </Field>
         </Item>
-        <Item Index="9" Type="Jypeli.ScoreItem, Jypeli, Version=11.4.3.0, Culture=neutral, PublicKeyToken=null">
-          <Field Name="Name" Type="System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
-            <Value>wwTesti1</Value>
-          </Field>
-          <Field Name="Score" Type="System.Double, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
-            <Value>49310</Value>
-          </Field>
-        </Item>
       </Array>
     </Field>
     <Field Name="LastEnteredName" Type="System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
-      <Value>Lauri</Value>
+      <Value>LAuri</Value>
     </Field>
   </Object>
 </State>
