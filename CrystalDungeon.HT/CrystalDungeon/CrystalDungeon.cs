@@ -19,6 +19,8 @@ public class CrystalDungeon : PhysicsGame
     private const int RuudunKoko = 40;
     private const int MaxTerveys = 10;
     private const int PomoTerveys = 100;
+    private const int Sydanarvo = 250;
+    private const int Kristalliarvo = 500;
     private PlatformCharacter pelaaja1;
     private PlatformCharacter vihollinen;
     private PlatformCharacter pomo;
@@ -360,13 +362,13 @@ public class CrystalDungeon : PhysicsGame
         LuoAse(3, 1, aseKuva1);
         pelaaja1Ase.Image = aseKuva1;
         
-        AddCollisionHandler(pelaaja1, "kristalli", KeraaKristalli);
+        AddCollisionHandler(pelaaja1, "kristalli", Keraa);
         AddCollisionHandler(pelaaja1, "piikki", Osui);
-        AddCollisionHandler(pelaaja1, "sydan", KeraaSydan);
+        AddCollisionHandler(pelaaja1, "sydan", Keraa);
         AddCollisionHandler(pelaaja1, "tappava", OsuiKuolettavasti);
         AddCollisionHandler(pelaaja1, "vihollinen", Osui);
         AddCollisionHandler(pelaaja1, "pomo", Osui);
-        AddCollisionHandler(pelaaja1, "ase1", KeraaAse);
+        AddCollisionHandler(pelaaja1, "ase1", Keraa);
         Add(pelaaja1);
     }
 
@@ -571,35 +573,38 @@ public class CrystalDungeon : PhysicsGame
             AddCollisionHandler<PlatformCharacter, PhysicsObject>(pelaaja1, kuula2, Osui);
         }
     }
-    
 
-    private void KeraaKristalli(PhysicsObject hahmo, PhysicsObject kristallikohde)
+
+    /// <summary>
+    /// Aliohjelmassa katsotaan, minkä asian pelaaja keräsi if-lauseen avulla.
+    /// Pelaajalla ja kerättävälle asialle tehdään halutut muutokset sen mukaan, mitä kerättiin.
+    /// </summary>
+    /// <param name="hahmo">pelaaja, joka keräsi tavaraa</param>
+    /// <param name="kerattava">esine, johon pelaaja osui ja keräsi sen</param>
+    private void Keraa(PhysicsObject hahmo, PhysicsObject kerattava)
     {
         maaliAani.Play();
-        MessageDisplay.Add("Keräsit kristallin!");
-        pistelaskuri.AddOverTime(500*kerroin, 0.5);
-        kristallit.Remove(kristallikohde);
-        kristallikohde.Destroy();
-    }
-    
-    
-    private void KeraaSydan(PhysicsObject hahmo, PhysicsObject sydan)
-    {
-        maaliAani.Play();
-        MessageDisplay.Add("Keräsit sydämen!");
-        terveyslaskuri.AddOverTime(1, 0.5);
-        pistelaskuri.AddOverTime(250 * kerroin, 0.5);
-        sydan.Destroy();
-    }
-    
-    
-    private void KeraaAse(PhysicsObject hahmo, PhysicsObject ase)
-    {
-        maaliAani.Play();
-        MessageDisplay.Add("Keräsit aseen, paina 1 vaihtaaksesi asetta!");
-        pistelaskuri.AddOverTime(1000 * kerroin, 0.5);
-        ase.Destroy();
-        asekeratty = true;
+        MessageDisplay.Add("Keräsit " + kerattava.Tag+"!");
+        kerattava.Destroy();
+
+        if (kerattava.Tag.ToString() == "kristalli")
+        {
+            pistelaskuri.AddOverTime(Kristalliarvo * kerroin, 0.5);
+            kristallit.Remove(kerattava);
+        }
+        
+        if (kerattava.Tag.ToString() == "sydan")
+        {
+            terveyslaskuri.AddOverTime(1, 0.5);
+            pistelaskuri.AddOverTime(Sydanarvo * kerroin, 0.5);
+        }
+        
+        if (kerattava.Tag.ToString() == "ase1")
+        {
+            pistelaskuri.AddOverTime(1000 * kerroin, 0.5);
+            asekeratty = true;
+            MessageDisplay.Add("Paina 1 vaihtaaksesi asetta!");
+        }
     }
     
     
@@ -635,6 +640,11 @@ public class CrystalDungeon : PhysicsGame
     }
     
     
+    /// <summary>
+    /// TArkistetaan, mihin ammus osui ja suoritetaan halutut komennot sen mukaan.
+    /// </summary>
+    /// <param name="ammus">pelaajan aseen tuottama ammus</param>
+    /// <param name="kohde">kohde, johon ammus osui, jonka mukaan suoritetaan halutut toiminnot</param>
     private void AmmusOsui(PhysicsObject ammus, PhysicsObject kohde)
     {
         MessageDisplay.Add("Ammus osui: " + kohde.Tag);
