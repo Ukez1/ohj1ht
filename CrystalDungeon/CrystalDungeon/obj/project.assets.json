@@ -1389,11 +1389,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\gr313135\\ohj1ht\\CrystalDungeon.HT\\CrystalDungeon\\CrystalDungeon.csproj",
+      "projectUniqueName": "C:\\Users\\gr313135\\ohj1ht\\CrystalDungeon\\CrystalDungeon\\CrystalDungeon.csproj",
       "projectName": "CrystalDungeon",
-      "projectPath": "C:\\Users\\gr313135\\ohj1ht\\CrystalDungeon.HT\\CrystalDungeon\\CrystalDungeon.csproj",
+      "projectPath": "C:\\Users\\gr313135\\ohj1ht\\CrystalDungeon\\CrystalDungeon\\CrystalDungeon.csproj",
       "packagesPath": "C:\\Users\\gr313135\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\gr313135\\ohj1ht\\CrystalDungeon.HT\\CrystalDungeon\\obj\\",
+      "outputPath": "C:\\Users\\gr313135\\ohj1ht\\CrystalDungeon\\CrystalDungeon\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

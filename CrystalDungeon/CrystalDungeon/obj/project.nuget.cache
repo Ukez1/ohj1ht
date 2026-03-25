@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "S12dIWzkGls=",
+  "dgSpecHash": "pwVvKZUehJk=",
   "success": true,
-  "projectFilePath": "C:\\Users\\gr313135\\ohj1ht\\CrystalDungeon.HT\\CrystalDungeon\\CrystalDungeon.csproj",
+  "projectFilePath": "C:\\Users\\gr313135\\ohj1ht\\CrystalDungeon\\CrystalDungeon\\CrystalDungeon.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\gr313135\\.nuget\\packages\\cyotek.drawing.bitmapfont\\2.0.4\\cyotek.drawing.bitmapfont.2.0.4.nupkg.sha512",
     "C:\\Users\\gr313135\\.nuget\\packages\\fontstashsharp\\1.2.8\\fontstashsharp.1.2.8.nupkg.sha512",
