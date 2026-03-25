@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CrystalDungeon")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b0358db23fed22e660319ab3edafb1182f9bcd65")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b583fa0c2ab1d2dacfc1aaf6a714aebef0ad2bd5")]
 [assembly: System.Reflection.AssemblyProductAttribute("CrystalDungeon")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CrystalDungeon")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
